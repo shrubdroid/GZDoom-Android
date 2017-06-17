@@ -181,7 +181,6 @@ public class LaunchFragmentGZdoom extends Fragment{
         //if (!extrawad.exists())
         {
             Utils.copyAsset(getActivity(),"gzdoom.pk3",base);
-            Utils.copyAsset(getActivity(),"gzdoom_dev.pk3",base);
             Utils.copyAsset(getActivity(),"gzdoom.sf2",base);
             //Utils.copyAsset(getActivity(),"lights_dt.pk3",base);
             //Utils.copyAsset(getActivity(),"brightmaps_dt.pk3",base);
@@ -278,7 +277,6 @@ public class LaunchFragmentGZdoom extends Fragment{
                     if ((file.endsWith(".wad") || file.endsWith(".pk3")|| file.endsWith(".pk7"))
                             && !file.contentEquals("prboom-plus.wad")
                             && !file.contentEquals("gzdoom.pk3")
-                            && !file.contentEquals("gzdoom_dev.pk3")
                             && !file.contentEquals("lights_dt.pk3")
                             && !file.contentEquals("brightmaps_dt.pk3")
                             && !file.contentEquals("lights.pk3")

@@ -475,7 +475,7 @@ FString GetUserFile (const char *file)
 	FString path;
 	struct stat info;
 
-	path = NicePath("./gzdoom_dev/");
+	path = NicePath("./gzdoom/");
 
 	if (stat (path, &info) == -1)
 	{
