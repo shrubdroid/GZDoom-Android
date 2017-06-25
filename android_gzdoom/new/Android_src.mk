@@ -15,7 +15,6 @@ LOCAL_CPPFLAGS :=  -O2 -DONLY_GPL -DHAVE_FLUIDSYNTH  -Wformat -Werror=format-sec
 LOCAL_C_INCLUDES := \
 $(TOP_DIR)/ \
 $(TOP_DIR)/SDL/include  \
-$(TOP_DIR)/GL \
 $(TOP_DIR)/../../Serial/jni \
  $(GZDOOM_TOP_PATH)/src/android  \
  $(GZDOOM_TOP_PATH)/src/android/extrafiles  \
@@ -259,7 +258,6 @@ MAIN_SRC_FILES = \
 	menu/readthis.cpp \
 	menu/videomenu.cpp \
 	gl/data/gl_matrix.cpp \
-	gl/data/gl_sections.cpp \
 	gl/data/gl_data.cpp \
 	gl/data/gl_portaldata.cpp \
 	gl/data/gl_setup.cpp \
@@ -271,6 +269,7 @@ MAIN_SRC_FILES = \
 	gl/renderer/gl_renderer.cpp \
 	gl/renderer/gl_renderstate.cpp \
 	gl/renderer/gl_lightdata.cpp \
+	gl/textures/gl_samplers.cpp \
 	gl/textures/gl_hwtexture.cpp \
 	gl/textures/gl_texture.cpp \
 	gl/textures/gl_material.cpp \
@@ -302,6 +301,7 @@ MAIN_SRC_FILES = \
 	gl/dynlights/gl_lightbuffer.cpp \
 	gl/shaders/gl_shader.cpp \
 	gl/shaders/gl_texshader.cpp \
+	gl/system/gl_load.c \
 	gl/system/gl_interface.cpp \
 	gl/system/gl_framebuffer.cpp \
 	gl/system/gl_menu.cpp \
@@ -428,7 +428,7 @@ LOCAL_LDLIBS := -lGLESv1_CM -ldl -llog -lOpenSLES -lz
 
 LOCAL_LDLIBS += -fuse-ld=bfd
 LOCAL_LDLIBS +=  -lEGL
-LOCAL_STATIC_LIBRARIES := nanogl fluidsynth-static jpeg_static lzma_dev gdtoa_dev dumb_dev gme_dev bzip2_dev
+LOCAL_STATIC_LIBRARIES := fluidsynth-static jpeg_static lzma_dev gdtoa_dev dumb_dev gme_dev bzip2_dev
 LOCAL_SHARED_LIBRARIES := touchcontrols fmod openal SDL
 #fmod
 include $(BUILD_SHARED_LIBRARY)

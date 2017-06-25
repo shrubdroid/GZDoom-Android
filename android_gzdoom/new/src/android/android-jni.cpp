@@ -17,8 +17,7 @@ extern "C"
 {
 #define DEFAULT_FADE_FRAMES 10
 
-#include "../GL/gl.h"
-#include "../GL/nano_gl.h"
+#include <GLES3/gl3.h>
 
 #include "in_android.h"
 #include "SDL_keycode.h"
@@ -77,8 +76,6 @@ GLfloat   model[16];
 
 void openGLStart()
 {
-	nanoPushState();
-
 	glGetIntegerv(GL_MATRIX_MODE, &matrixMode);
 	glGetFloatv(GL_PROJECTION_MATRIX, projection);
 	glGetFloatv(GL_MODELVIEW_MATRIX, model);
@@ -105,8 +102,6 @@ void openGLStart()
 
 void openGLEnd()
 {
-	nanoPopState();
-
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(model);
 

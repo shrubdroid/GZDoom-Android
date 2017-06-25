@@ -1,18 +1,17 @@
 #!/bin/sh
 
-if [[ $1 == 'fresh' ]]; then
+if [ ! -d doom/src/main/jni/Doom ] || [[ $1 == 'fresh' ]]; then
     rm -r doom/.externalNativeBuild
     rm -r doom/build
     rm -r doom/src/main/obj
     rm -r doom/src/main/jni/Doom/gzdoom_2
+    mkdir doom/src/main/jni/Doom
     cp -r doom/src/main/jni/gzdoom doom/src/main/jni/Doom/gzdoom_2
     cp -r android_gzdoom/new/*mk doom/src/main/jni/Doom/gzdoom_2
-    cp -r android_gzdoom/new/src/android doom/src/main/jni/Doom/gzdoom_2/src
-    cp -r android_gzdoom/new/src/sound/fmodsound_studio.* doom/src/main/jni/Doom/gzdoom_2/src/sound
-    cp -r android_gzdoom/new/src/gl/api doom/src/main/jni/Doom/gzdoom_2/src/gl
-    cp -r android_gzdoom/new/src/gl/data/gl_sections.cpp doom/src/main/jni/Doom/gzdoom_2/src/gl/data
-    cp -r android_gzdoom/new/src/gl/data/gl_sections.h doom/src/main/jni/Doom/gzdoom_2/src/gl/data
 fi
+
+cp -r android_gzdoom/new/src/android doom/src/main/jni/Doom/gzdoom_2/src
+cp -r android_gzdoom/new/src/sound/fmodsound_studio.* doom/src/main/jni/Doom/gzdoom_2/src/sound
 
 patches=$(find android_gzdoom/patches -type f)
 
