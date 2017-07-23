@@ -41,27 +41,15 @@ public class OptionsFragment extends Fragment{
     TextView basePathTextView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View mainView = inflater.inflate(R.layout.fragment_options, null);
         Spinner resSpinnder = (Spinner)mainView.findViewById(R.id.resolution_div_spinner);
 
         List<String> list = new ArrayList<String>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        list.add("6");
-        list.add("7");
-        list.add("8");
+        for (int i = 1; i <= 8; i++) {
+            list.add(String.valueOf(i));
+        }
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,list);
         dataAdapter.setDropDownViewResource (android.R.layout.simple_spinner_dropdown_item);
@@ -94,8 +82,7 @@ public class OptionsFragment extends Fragment{
                                 new DirectoryChooserDialog.ChosenDirectoryListener()
                         {
                             @Override
-                            public void onChosenDir(String chosenDir)
-                            {
+                            public void onChosenDir(String chosenDir) {
                                 updateBaseDir(chosenDir);
                             }
                         });
@@ -115,8 +102,6 @@ public class OptionsFragment extends Fragment{
             }
         });
 
-
-
         Button sdcardDir = (Button)mainView.findViewById(R.id.sdcard_base_button);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             sdcardDir.setOnClickListener(new OnClickListener() {
@@ -126,8 +111,7 @@ public class OptionsFragment extends Fragment{
                 public void onClick(View v) {
                     File[] files =getActivity().getExternalFilesDirs(null);
 
-                    if ((files.length < 2) || (files[1] == null))
-                    {
+                    if ((files.length < 2) || (files[1] == null)) {
                         showError("Can not find an external SD Card, is the card inserted?");
                         return;
                     }
@@ -141,17 +125,14 @@ public class OptionsFragment extends Fragment{
                     dialogBuilder.setPositiveButton("OK", new android.content.DialogInterface.OnClickListener()
                     {
                         @Override
-                        public void onClick(DialogInterface dialog, int which)
-                        {
+                        public void onClick(DialogInterface dialog, int which) {
                             updateBaseDir(path);
                         }
                     });
                     dialogBuilder.setNegativeButton("Cancel",  new android.content.DialogInterface.OnClickListener()
                     {
                         @Override
-                        public void onClick(DialogInterface dialog, int which)
-                        {
-
+                        public void onClick(DialogInterface dialog, int which) {
                         }
                     });
 
@@ -160,9 +141,7 @@ public class OptionsFragment extends Fragment{
 
                 }
             });
-        }
-        else
-        {
+        } else {
             sdcardDir.setVisibility(View.GONE);
         }
 
@@ -173,25 +152,21 @@ public class OptionsFragment extends Fragment{
     {
         File fdir = new File(dir);
 
-        if (!fdir.isDirectory())
-        {
+        if (!fdir.isDirectory()) {
             showError(dir + " is not a directory");
             return;
         }
 
-        if (!fdir.canWrite())
-        {
+        if (!fdir.canWrite()) {
             showError(dir + " is not a writable");
             return;
         }
-
 
         //Test CAN actually write, the above canWrite can pass on KitKat SD cards WTF GOOGLE
         File test_write = new File (dir,"test_write");
         try {
             test_write.createNewFile();
-            if (!test_write.exists())
-            {
+            if (!test_write.exists()) {
                 showError(dir + " is not a writable");
                 return;
             }
@@ -201,13 +176,10 @@ public class OptionsFragment extends Fragment{
         }
         test_write.delete();
 
-
-        if (dir.contains(" "))
-        {
+        if (dir.contains(" ")) {
             showError(dir + " must not contain any spaces");
             return;
         }
-
 
         AppSettings.gzdoomBaseDir = dir;
         AppSettings.setStringOption(getActivity(), "base_path", AppSettings.gzdoomBaseDir);
@@ -216,8 +188,7 @@ public class OptionsFragment extends Fragment{
         basePathTextView.setText(AppSettings.gzdoomBaseDir);
     }
 
-    private void showError(String error)
-    {
+    private void showError(String error) {
         AlertDialog.Builder dialogBuilder = new Builder(getActivity());
         dialogBuilder.setTitle(error);
         dialogBuilder.setPositiveButton("OK", new android.content.DialogInterface.OnClickListener()

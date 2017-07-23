@@ -67,27 +67,6 @@ public class Utils {
         out.close();
     }
 
-    static public  void showDownloadDialog(final Activity act,String title,final String KEY,final String directory,final String file)
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(act);
-        builder.setMessage(title)
-        .setCancelable(true)
-        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // Download stuff here
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
     public static String checkFiles(String basePath,String[] files_to_ceck)
     {
         File[] files = new File(basePath ).listFiles();
@@ -467,91 +446,36 @@ public class Utils {
         return BitmapFactory.decodeResource(res, resId, options);
     }
 
-    public static void loadArgs(Context ctx,ArrayList<String> args)
-    {
-        File cacheDir = ctx.getFilesDir();
-
-        FileInputStream fis = null;
-        ObjectInputStream in = null;
-        try
-        {
-            fis = new FileInputStream(new File(cacheDir,"args_hist.dat"));
-            in = new ObjectInputStream(fis);
-            ArrayList<String> argsHistory = (ArrayList<String>)in.readObject();
-            args.clear();
-            args.addAll(argsHistory);
-            in.close();
-            return;
-        }
-        catch(IOException ex)
-        {
-
-        }
-        catch(ClassNotFoundException ex)
-        {
-
-        }
-        //failed load, load default
-        args.clear();
-    }
-
-
-    public static void saveArgs(Context ctx,ArrayList<String> args)
-    {
-        File cacheDir = ctx.getFilesDir();
-
-        if (!cacheDir.exists())
-            cacheDir.mkdirs();
-
-        FileOutputStream fos = null;
-        ObjectOutputStream out = null;
-        try
-        {
-            fos = new FileOutputStream(new File(cacheDir,"args_hist.dat"));
-            out = new ObjectOutputStream(fos);
-            out.writeObject(args);
-            out.close();
-        }
-        catch(IOException ex)
-        {
-            Toast.makeText(ctx,"Error saving args History list: " + ex.toString(), Toast.LENGTH_LONG).show();
-        }
-    }
-
     public static void setImmersionMode(final Activity act)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            act.getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY );
 
-            if (AppSettings.immersionMode)
-            {
-                act.getWindow().getDecorView().setSystemUiVisibility(
-                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY );
+            View decorView = act.getWindow().getDecorView();
+            decorView.setOnSystemUiVisibilityChangeListener
+            (new View.OnSystemUiVisibilityChangeListener() {
+                @Override
+                public void onSystemUiVisibilityChange(int visibility) {
+                    Log.d(LOG,"onSystemUiVisibilityChange");
 
-                View decorView = act.getWindow().getDecorView();
-                decorView.setOnSystemUiVisibilityChangeListener
-                (new View.OnSystemUiVisibilityChangeListener() {
-                    @Override
-                    public void onSystemUiVisibilityChange(int visibility) {
-                        Log.d(LOG,"onSystemUiVisibilityChange");
+                    act.getWindow().getDecorView().setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY );
 
-                        act.getWindow().getDecorView().setSystemUiVisibility(
-                                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-                                | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                                | View.SYSTEM_UI_FLAG_IMMERSIVE
-                                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY );
-
-                    }
-                });
-            }
+                }
+            });
         }
     }
 
@@ -559,27 +483,24 @@ public class Utils {
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
-            if (AppSettings.immersionMode)
-            {
-                Handler handler = new Handler();
+            Handler handler = new Handler();
 
-                handler.postDelayed(new Runnable() {
-                    public void run() {
+            handler.postDelayed(new Runnable() {
+                public void run() {
 
-                        if (hasFocus) {
-                            act.getWindow().getDecorView().setSystemUiVisibility(
-                                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                                            | View.SYSTEM_UI_FLAG_IMMERSIVE
-                                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-                        }
+                    if (hasFocus) {
+                        act.getWindow().getDecorView().setSystemUiVisibility(
+                                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                                        | View.SYSTEM_UI_FLAG_IMMERSIVE
+                                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
                     }
+                }
 
-                }, 2000);
-            }
+            }, 2000);
         }
     }
 

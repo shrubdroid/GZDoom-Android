@@ -28,7 +28,7 @@
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/choose_base_button"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/light_green" >
+            android:textStyle="bold" >
         </TextView>
 
         <LinearLayout

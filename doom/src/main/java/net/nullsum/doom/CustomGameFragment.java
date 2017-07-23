@@ -16,9 +16,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.nullsum.doom.AppSettings;
 import net.nullsum.doom.Utils;
@@ -31,20 +33,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class LaunchFragmentGZdoom extends Fragment{
+public class CustomGameFragment extends Fragment{
 
     String LOG = "LaunchFragment";
 
+
+    TextView gameArgsTextView = null;
+    EditText argsEditText;
     ListView listview;
     TextView copyWadsTextView;
-    String gameArgs;
 
     GamesListAdapter listAdapter;
 
     ArrayList<DoomWad> games = new ArrayList<DoomWad>();
     DoomWad selectedMod = null;
 
+
     String fullBaseDir;
+
+    ArrayList<String> argsHistory = new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +67,7 @@ public class LaunchFragmentGZdoom extends Fragment{
         Log.d(LOG,"onHiddenChanged");
         fullBaseDir = AppSettings.getFullDir();
 
-        if (gameArgs == null) //rare device call onHiddenchange before the view is created, detect this to prevent crash
+        if (gameArgsTextView == null) //rare device call onHiddenchange before the view is created, detect this to prevent crash
             return;
 
         refreshGames();
@@ -70,10 +77,14 @@ public class LaunchFragmentGZdoom extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View mainView = inflater.inflate(R.layout.fragment_launch_gzdoom, null);
+        View mainView = inflater.inflate(R.layout.fragment_custom_game, null);
 
+
+        argsEditText = (EditText)mainView.findViewById(R.id.extra_args_edittext);
+        gameArgsTextView = (TextView)mainView.findViewById(R.id.extra_args_textview);
         listview = (ListView)mainView.findViewById(R.id.listView);
 
+        //listview.setBackgroundDrawable(new BitmapDrawable(getResources(),Utils.decodeSampledBitmapFromResource(getResources(),R.drawable.chco_doom,635,284)));
         listAdapter = new GamesListAdapter(getActivity());
         listview.setAdapter(listAdapter);
 
@@ -89,6 +100,7 @@ public class LaunchFragmentGZdoom extends Fragment{
 
         Button startfull = (Button)mainView.findViewById(R.id.start_full);
         startfull.setOnClickListener(new OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
@@ -112,6 +124,49 @@ public class LaunchFragmentGZdoom extends Fragment{
             }
         });
 
+
+
+        Button wad_button = (Button)mainView.findViewById(R.id.start_wads);
+        wad_button.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                new ModSelectDialog(getActivity(), fullBaseDir,false){
+                    public void resultResult(String result)
+                    {
+                        argsEditText.setText(result);
+                    }
+                };
+            }
+        });
+
+        ImageView delete_args = (ImageView)mainView.findViewById(R.id.args_delete_imageview);
+        delete_args.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View v) {
+                argsEditText.setText("");
+            }
+        });
+
+        ImageView history = (ImageView)mainView.findViewById(R.id.args_history_imageview);
+        history.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            public void onClick(View v) {
+
+                String[] servers = new String[ argsHistory.size()];
+                for (int n=0;n<argsHistory.size();n++) servers[n] = argsHistory.get(n);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Extra Args History");
+                builder.setItems(servers, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        argsEditText.setText(argsHistory.get(which));
+                    }
+                });
+                builder.show();
+            }
+        });
+
         refreshGames();
 
         return mainView;
@@ -119,11 +174,38 @@ public class LaunchFragmentGZdoom extends Fragment{
 
     void startGame(final String base,boolean ignoreMusic,final String moreArgs)
     {
-        Utils.copyAsset(getActivity(),"gzdoom.pk3",base);
-        Utils.copyAsset(getActivity(),"gzdoom.sf2",base);
+        //Check gzdoom.pk3 wad exists
+        //File extrawad = new File(base + "/gzdoom.pk3"  );
+        //if (!extrawad.exists())
+        {
+            Utils.copyAsset(getActivity(),"gzdoom.pk3",base);
+            Utils.copyAsset(getActivity(),"gzdoom.sf2",base);
+            //Utils.copyAsset(getActivity(),"lights_dt.pk3",base);
+            //Utils.copyAsset(getActivity(),"brightmaps_dt.pk3",base);
+        }
 
-        String args = gameArgs;
+        //File[] files = new File(basePath ).listFiles();
 
+        String extraArgs = argsEditText.getText().toString().trim();
+
+        if (extraArgs.length() > 0)
+        {
+            Iterator<String> it = argsHistory.iterator();
+            while (it.hasNext()) {
+                String s = it.next();
+                if (s.contentEquals(extraArgs))
+                    it.remove();
+            }
+
+            while (argsHistory.size()>50)
+                argsHistory.remove(argsHistory.size()-1);
+
+            argsHistory.add(0, extraArgs);
+        }
+
+        String args =  gameArgsTextView.getText().toString() + " " + argsEditText.getText().toString();
+
+        //Intent intent = new Intent(getActivity(), Game.class);
         Intent intent = new Intent(getActivity(), net.nullsum.doom.Game.class);
         intent.setAction(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -153,7 +235,7 @@ public class LaunchFragmentGZdoom extends Fragment{
         if ((pos == -1) || (pos >= games.size()))
         {
             selectedMod = null;
-            gameArgs = "";
+            gameArgsTextView.setText("");
             return;
         }
 
@@ -166,7 +248,7 @@ public class LaunchFragmentGZdoom extends Fragment{
 
         game.setSelected(true);
 
-        gameArgs = game.getArgs();
+        gameArgsTextView.setText(game.getArgs());
 
         AppSettings.setIntOption(getActivity(), "last_iwad", pos);
 
@@ -195,17 +277,14 @@ public class LaunchFragmentGZdoom extends Fragment{
                             && !file.contentEquals("brightmaps_dt.pk3")
                             && !file.contentEquals("lights.pk3")
                             && !file.contentEquals("brightmaps.pk3")
-                            && !file.contentEquals("voices.wad")
                             )
                     {
                         DoomWad game = new DoomWad(file);
-
                         games.add(game);
                     }
                 }
             }
         }
-
 
         if (listAdapter != null)
             listAdapter.notifyDataSetChanged();
@@ -226,10 +305,12 @@ public class LaunchFragmentGZdoom extends Fragment{
         }
 
         public Object getItem(int arg0) {
+            // TODO Auto-generated method stub
             return null;
         }
 
         public long getItemId(int arg0) {
+            // TODO Auto-generated method stub
             return 0;
         }
 
@@ -250,6 +331,7 @@ public class LaunchFragmentGZdoom extends Fragment{
             else
                 view.setBackgroundResource(0);
 
+            //iv.setImageResource(game.getImage());
             iv.setImageBitmap(Utils.decodeSampledBitmapFromResource(getResources(),game.getImage(),200,100));
 
             TextView title = (TextView)view.findViewById(R.id.title_textview);
