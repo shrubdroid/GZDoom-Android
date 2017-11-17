@@ -32,15 +32,15 @@ LOCAL_SRC_FILES =  	\
     src/core/rendsig.c \
     src/core/unload.c \
     src/helpers/barray.c \
-    src/helpers/blip_buf.c \
     src/helpers/clickrem.c \
     src/helpers/memfile.c \
     src/helpers/resample.c \
     src/helpers/riff.c \
+		src/helpers/lpc.c \
+		src/helpers/resampler.c \
     src/helpers/sampbuf.c \
     src/helpers/silence.c \
     src/helpers/stdfile.c \
-    src/it/filter.cpp \
     src/it/itload.c \
     src/it/itload2.c \
     src/it/itmisc.c \
@@ -51,6 +51,10 @@ LOCAL_SRC_FILES =  	\
     src/it/itunload.c \
     src/it/load669.c \
     src/it/load6692.c \
+		src/it/loadamf.c \
+		src/it/loadamf2.c \
+		src/it/loadany.c \
+		src/it/loadany2.c \
     src/it/loadasy.c \
     src/it/loadasy2.c \
     src/it/loadmod.c \
@@ -77,6 +81,10 @@ LOCAL_SRC_FILES =  	\
     src/it/read669.c \
     src/it/read6692.c \
     src/it/readam.c \
+		src/it/readamf.c \
+		src/it/readamf2.c \
+		src/it/readany.c \
+		src/it/readany2.c \
     src/it/readasy.c \
     src/it/readdsmf.c \
     src/it/readmod.c \

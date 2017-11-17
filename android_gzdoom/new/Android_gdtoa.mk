@@ -19,6 +19,7 @@ LOCAL_C_INCLUDES :=   . $(GZDOOM_TOP_PATH)/src/android/extrafiles
 
 
 LOCAL_SRC_FILES =  	\
+	arithchk.c \
 	dmisc.c \
 	dtoa.c \
 	g_Qfmt.c \
@@ -34,6 +35,7 @@ LOCAL_SRC_FILES =  	\
 	hd_init.c \
 	hexnan.c \
 	misc.c \
+	qnan.c \
 	smisc.c \
 	strtoIQ.c \
 	strtoId.c \
@@ -48,6 +50,8 @@ LOCAL_SRC_FILES =  	\
 	strtopQ.c \
 	strtopd.c \
 	strtopdd.c \
+	strtodnrp.c \
+	strtof.c \
 	strtopf.c \
 	strtopx.c \
 	strtopxL.c \

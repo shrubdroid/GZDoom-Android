@@ -5,7 +5,6 @@
 #include <android/log.h>
 #include <unistd.h>
 
-
 #include "SDL_android_extra.h"
 
 #include "TouchControlsContainer.h"

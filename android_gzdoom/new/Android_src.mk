@@ -14,9 +14,10 @@ LOCAL_CPPFLAGS :=  -O2 -DONLY_GPL -DHAVE_FLUIDSYNTH  -Wformat -Werror=format-sec
 
 LOCAL_C_INCLUDES := \
 $(TOP_DIR)/ \
-$(TOP_DIR)/SDL/include  \
+$(TOP_DIR)/SDL2/include  \
 $(TOP_DIR)/GL \
 $(TOP_DIR)/../../Serial/jni \
+$(GZDOOM_TOP_PATH)/src \
 $(GZDOOM_TOP_PATH)/src/android \
 $(GZDOOM_TOP_PATH)/src/android/extrafiles \
 $(GZDOOM_TOP_PATH)/game-music-emu/ \
@@ -30,7 +31,6 @@ $(GZDOOM_TOP_PATH)/src/gl/api \
 $(GZDOOM_TOP_PATH)/src/gl/data \
 $(GZDOOM_TOP_PATH)/src/gl/dynlights \
 $(GZDOOM_TOP_PATH)/src/gl/hqnx \
-$(GZDOOM_TOP_PATH)/src/gl/hqnx_asm \
 $(GZDOOM_TOP_PATH)/src/gl/models \
 $(GZDOOM_TOP_PATH)/src/gl/renderer \
 $(GZDOOM_TOP_PATH)/src/gl/scene \
@@ -55,7 +55,6 @@ $(GZDOOM_TOP_PATH)/src/posix/sdl \
 $(GZDOOM_TOP_PATH)/src/rapidjson \
 $(GZDOOM_TOP_PATH)/src/rapidjson/error \
 $(GZDOOM_TOP_PATH)/src/rapidjson/internal \
-$(GZDOOM_TOP_PATH)/src/rapidjson/msinttypes \
 $(GZDOOM_TOP_PATH)/src/r_data \
 $(GZDOOM_TOP_PATH)/src/resourcefiles \
 $(GZDOOM_TOP_PATH)/src/scripting \
@@ -111,10 +110,6 @@ posix/sdl/sdlglvideo.cpp \
 posix/sdl/st_start.cpp \
 posix/unix/i_specialpaths.cpp \
 posix/unix/iwadpicker_gtk.cpp \
-gl/hqnx_asm/hq2x_asm.cpp \
-gl/hqnx_asm/hq3x_asm.cpp \
-gl/hqnx_asm/hq4x_asm.cpp \
-gl/hqnx_asm/hqnx_asm_Image.cpp \
 swrenderer/r_all.cpp \
 polyrenderer/poly_all.cpp \
 sound/oplsynth/opl_mus_player.cpp \
@@ -523,7 +518,7 @@ LOCAL_LDLIBS := -lGLESv1_CM -ldl -llog -lOpenSLES -lz
 LOCAL_LDLIBS += -fuse-ld=bfd
 LOCAL_LDLIBS +=  -lEGL
 LOCAL_STATIC_LIBRARIES := nanogl fluidsynth-static jpeg_static lzma_dev gdtoa_dev dumb_dev gme_dev bzip2_dev
-LOCAL_SHARED_LIBRARIES := touchcontrols fmod openal SDL
+LOCAL_SHARED_LIBRARIES := touchcontrols fmod openal SDL2
 #fmod
 include $(BUILD_SHARED_LIBRARY)
 

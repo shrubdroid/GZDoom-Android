@@ -59,14 +59,14 @@ extern int main_android (int argc, char **argv);
 #include "m_png.h"
 #include "gi.h"
 #include "a_keys.h"
-#include "a_artifacts.h"
+//#include "a_artifacts.h"
 #include "r_data/r_translate.h"
 #include "cmdlib.h"
 #include "d_net.h"
 #include "d_event.h"
 #include "p_acs.h"
 #include "m_joy.h"
-#include "farchive.h"
+//#include "farchive.h"
 #include "r_renderer.h"
 #include "r_data/colormaps.h"
 
@@ -433,8 +433,8 @@ void Android_AM_controls(float *zoom, fixed_t *pan_x,fixed_t *pan_y)
 }
 
 extern fixed_t			forwardmove[2], sidemove[2];
-extern void G_AddViewAngle (int yaw);
-extern void G_AddViewPitch (int look);
+extern void G_AddViewAngle (int yaw, bool mouse = false);
+extern void G_AddViewPitch (int look, bool mouse = false);
 void AddCommandString (char *cmd, int keynum);
 void Android_IN_Move(ticcmd_t* cmd )
 {
@@ -447,7 +447,7 @@ void Android_IN_Move(ticcmd_t* cmd )
 	switch(look_pitch_mode)
 	{
 	case LOOK_MODE_MOUSE:
-		G_AddViewPitch(look_pitch_mouse * 30000);
+		G_AddViewPitch(look_pitch_mouse * 30000, true);
 		look_pitch_mouse = 0;
 		break;
 	case LOOK_MODE_JOYSTICK:
@@ -459,7 +459,7 @@ void Android_IN_Move(ticcmd_t* cmd )
 	switch(look_yaw_mode)
 	{
 	case LOOK_MODE_MOUSE:
-		G_AddViewAngle(-look_yaw_mouse * 50000);
+		G_AddViewAngle(-look_yaw_mouse * 50000, true);
 		look_yaw_mouse = 0;
 		break;
 	case LOOK_MODE_JOYSTICK:
