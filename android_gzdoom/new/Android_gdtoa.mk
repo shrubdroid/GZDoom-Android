@@ -58,7 +58,7 @@ LOCAL_SRC_FILES =  	\
 	strtorx.c \
 	strtorxL.c \
 	sum.c \
-	ulp.c \
+	ulp.c
 
 #strtof.c \
 

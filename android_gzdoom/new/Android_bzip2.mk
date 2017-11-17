@@ -25,7 +25,7 @@ LOCAL_SRC_FILES =  	\
     crctable.c \
     decompress.c \
     huffman.c \
-    randtable.c \
+    randtable.c
 
 LOCAL_LDLIBS :=  -ldl -llog
 

@@ -94,7 +94,7 @@ LOCAL_SRC_FILES =  	\
     src/it/readstm2.c \
     src/it/readxm.c \
     src/it/readxm2.c \
-    src/it/xmeffect.c \
+    src/it/xmeffect.c
 
 LOCAL_LDLIBS :=  -ldl -llog
 

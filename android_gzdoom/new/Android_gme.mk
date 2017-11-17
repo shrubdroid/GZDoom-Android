@@ -19,7 +19,7 @@ LOCAL_C_INCLUDES :=  $(LOCAL_PATH)/gme/
 
 
 LOCAL_SRC_FILES =  	\
-   gme/Blip_Buffer.cpp \ \
+   gme/Blip_Buffer.cpp \
     gme/Classic_Emu.cpp \
     gme/Data_Reader.cpp \
     gme/Dual_Resampler.cpp \
@@ -64,7 +64,7 @@ LOCAL_SRC_FILES =  	\
     gme/Vgm_Emu.cpp \
     gme/Vgm_Emu_Impl.cpp \
     gme/Ym2413_Emu.cpp \
-    gme/Ym2612_Emu.cpp \
+    gme/Ym2612_Emu.cpp
 
 #strtof.c \
 
