@@ -17,8 +17,8 @@ $(TOP_DIR)/ \
 $(TOP_DIR)/SDL/include  \
 $(TOP_DIR)/GL \
 $(TOP_DIR)/../../Serial/jni \
-$(GZDOOM_TOP_PATH)/src/android
-$(GZDOOM_TOP_PATH)/src/android/extrafiles
+$(GZDOOM_TOP_PATH)/src/android \
+$(GZDOOM_TOP_PATH)/src/android/extrafiles \
 $(GZDOOM_TOP_PATH)/game-music-emu/ \
 $(GZDOOM_TOP_PATH)/gdtoa \
 $(GZDOOM_TOP_PATH)/lzma/C \
