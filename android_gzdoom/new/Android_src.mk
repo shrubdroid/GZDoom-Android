@@ -7,7 +7,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := gzdoom
 
 #-DNO_FMOD
-LOCAL_CPPFLAGS :=  -O2 -DONLY_GPL -DHAVE_FLUIDSYNTH  -Wformat -Werror=format-security  -fexceptions -fpermissive -DANDROID -DUSE_GLES -Dstricmp=strcasecmp -Dstrnicmp=strncasecmp -D__forceinline=inline -DNO_GTK -DDISABLE_SSE -fsigned-char
+LOCAL_CPPFLAGS :=  -std=c++14 -O2 -DONLY_GPL -DHAVE_FLUIDSYNTH  -Wformat -Werror=format-security  -fexceptions -fpermissive -DANDROID -DUSE_GLES -Dstricmp=strcasecmp -Dstrnicmp=strncasecmp -D__forceinline=inline -DNO_GTK -DDISABLE_SSE -fsigned-char
 
 #$(TOP_DIR)/GL \
 
@@ -117,7 +117,6 @@ sound/mpg123_decoder.cpp \
 sound/music_midi_base.cpp \
 sound/oalsound.cpp \
 sound/sndfile_decoder.cpp \
-sound/mididevices/music_timiditypp_mididevice.cpp \
 gl/data/gl_matrix.cpp \
 gl/utility/gl_clock.cpp \
 gl/renderer/gl_2ddrawer.cpp \

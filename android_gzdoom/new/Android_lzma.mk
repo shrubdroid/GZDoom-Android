@@ -33,13 +33,11 @@ LOCAL_SRC_FILES =  \
 	C/CpuArch.c \
 	C/Delta.c \
 	C/LzFind.c \
-	C/LzFindMt.c \
 	C/Lzma2Dec.c \
 	C/LzmaDec.c \
 	C/LzmaEnc.c \
 	C/Ppmd7.c \
-	C/Ppmd7Dec.c \
-	C/Threads.c
+	C/Ppmd7Dec.c
 
 LOCAL_LDLIBS :=  -ldl -llog
 
