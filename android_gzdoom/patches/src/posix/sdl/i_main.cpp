@@ -24,7 +24,7 @@
  	if (SDL_Init (0) < 0)
  	{
 -		fprintf (stderr, "Could not initialize SDL:\n%s\n", SDL_GetError());
-+		LOGE(stderr, "Could not initialize SDL:\n%s\n", SDL_GetError());
++		LOGE("Could not initialize SDL:\n%s\n", SDL_GetError());
  		return -1;
  	}
  	atterm (SDL_Quit);
@@ -33,7 +33,7 @@
  		I_ShutdownJoysticks();
  		if (error.GetMessage ())
 -			fprintf (stderr, "%s\n", error.GetMessage ());
-+			LOGE(stderr, "%s\n", error.GetMessage ());
++			LOGE("%s\n", error.GetMessage ());
  
  #ifdef __APPLE__
  		Mac_I_FatalError(error.GetMessage());

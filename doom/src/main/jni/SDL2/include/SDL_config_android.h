@@ -33,16 +33,6 @@
 
 #include <stdarg.h>
 
-/* shrub.droid - added in from OpenGames */
-#include <android/log.h>
-
-#ifndef LOGI
-#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO,"DUKE", __VA_ARGS__))
-#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "DUKE", __VA_ARGS__))
-#define LOGE(...) ((void)__android_log_print(ANDROID_LOG_ERROR,"DUKE", __VA_ARGS__))
-#endif
-/* ** */
-
 #define HAVE_GCC_ATOMICS    1
 
 #define STDC_HEADERS    1
