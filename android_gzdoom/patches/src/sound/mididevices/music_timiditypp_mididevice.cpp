@@ -1,17 +1,18 @@
 --- gzdoom/src/sound/mididevices/music_timiditypp_mididevice.cpp	2017-11-17 17:53:39.252185871 -0600
-+++ gzdoom_android/src/sound/mididevices/music_timiditypp_mididevice.cpp	2017-11-17 23:52:48.488564931 -0600
-@@ -48,7 +48,11 @@
++++ gzdoom_android/src/sound/mididevices/music_timiditypp_mididevice.cpp	2017-11-18 23:02:24.317432235 -0600
+@@ -48,8 +48,12 @@
  
  #include <sys/types.h>
  #include <sys/wait.h>
 +
 +#ifndef __ANDROID__
  #include <wordexp.h>
+ #include <glob.h>
 +#endif
 +
- #include <glob.h>
  #include <signal.h>
  
+ int ChildQuit;
 @@ -533,16 +537,20 @@
  	}
  

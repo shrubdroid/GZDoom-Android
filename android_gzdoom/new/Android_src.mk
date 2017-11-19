@@ -117,6 +117,7 @@ sound/mpg123_decoder.cpp \
 sound/music_midi_base.cpp \
 sound/oalsound.cpp \
 sound/sndfile_decoder.cpp \
+sound/mididevices/music_timiditypp_mididevice.cpp \
 gl/data/gl_matrix.cpp \
 gl/utility/gl_clock.cpp \
 gl/renderer/gl_2ddrawer.cpp \
