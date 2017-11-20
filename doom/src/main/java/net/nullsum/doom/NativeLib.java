@@ -3,34 +3,36 @@ package net.nullsum.doom;
 import android.util.Log;
 import android.view.KeyEvent;
 
-import com.beloko.libsdl.SDLLib;
 import net.nullsum.doom.MyGLSurfaceView;
 import com.beloko.touchcontrols.ControlInterface;
 
 public class NativeLib implements ControlInterface {
 
-	public static void loadLibraries()
-	{
+	// public static void loadLibraries()
+	// {
 
-		try {
-			Log.i("JNI", "Trying to load libraries");
+	// 	try {
+	// 		Log.i("JNI", "Trying to load libraries");
 
-			SDLLib.loadSDL();
-			System.loadLibrary("touchcontrols");
 			
-				//System.loadLibrary("fmodL");
+	// 		System.loadLibrary("SDL2");
+	// 		System.loadLibrary("SDL2_mixer");
+	// 		System.loadLibrary("SDL2_image");
+	// 		System.loadLibrary("touchcontrols");
 			
-			System.loadLibrary("fmod");
-			System.loadLibrary("openal");
-			//System.loadLibrary("output_sdl");
-            System.loadLibrary("gzdoom");
+	// 			//System.loadLibrary("fmodL");
+			
+	// 		System.loadLibrary("fmod");
+	// 		System.loadLibrary("openal");
+	// 		//System.loadLibrary("output_sdl");
+  //           System.loadLibrary("gzdoom");
 
-		}
-		catch (UnsatisfiedLinkError ule) {
-			Log.e("JNI", "WARNING: Could not load shared library: " + ule.toString());
-		}
+	// 	}
+	// 	catch (UnsatisfiedLinkError ule) {
+	// 		Log.e("JNI", "WARNING: Could not load shared library: " + ule.toString());
+	// 	}
 
-	}
+	// }
 
 	public static native int init(String graphics_dir,int mem,String[] args,int game,String path);
 
