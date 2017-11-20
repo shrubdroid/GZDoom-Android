@@ -1,0 +1,17 @@
+dhdmi_cec: write_node: Failed to access path: error: Operation not permitted
+_____________________
+
+Unable to create png struct : /mnt/expand/.../user/0/net.nullsum.doom/files/map.png
+       .
+       .
+       .
+    ...                                             /net.nullsum.doom/files/settings.png
+_____________________
+
+Error: Couldn't read file /storage/emulated/0/GZDoom/config/.local/share/Steam/config/config.vdf
+_____________________
+
+Error: Script error, "gzdoom.pk3:compatibility.txt" line 5:
+Expected '}', got 'sectorflooroffset'.
+
+AudioTrack: did not receive expected priority boost on time
