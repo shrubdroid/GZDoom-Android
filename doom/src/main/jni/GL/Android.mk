@@ -17,7 +17,7 @@ LOCAL_CFLAGS += -march=armv7-a -mfloat-abi=softfp
 LOCAL_LDLIBS += -Wl,--fix-cortex-a8
 
 
-#LOCAL_C_INCLUDES :=   $(TOP_DIR)  $(TOP_DIR)/prboom/ $(TOP_DIR)/SDL/include
+#LOCAL_C_INCLUDES :=   $(TOP_DIR)  $(TOP_DIR)/prboom/ $(TOP_DIR)/SDL2/include
 
 
 
