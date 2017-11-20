@@ -26,12 +26,12 @@ public class SDLLib {
 		try {
 			Log.i("JNI", "Trying to load SDL.so");
 
-			System.loadLibrary("SDL");
-			System.loadLibrary("SDL_mixer");
-			System.loadLibrary("SDL_image");
+			System.loadLibrary("SDL2");
+			System.loadLibrary("SDL2_mixer");
+			System.loadLibrary("SDL2_image");
 		}
 		catch (UnsatisfiedLinkError ule) {
-			Log.e("JNI", "WARNING: Could not load SDL.so: " + ule.toString());
+			Log.e("JNI", "WARNING: Could not load SDL2.so: " + ule.toString());
 		}
 	}
 
