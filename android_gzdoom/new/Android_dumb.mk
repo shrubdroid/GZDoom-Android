@@ -11,7 +11,7 @@ LOCAL_CFLAGS :=   -O2  -DNEED_ITOA
 
 LOCAL_LDLIBS += -llog
 
-LOCAL_CFLAGS += -march=armv7-a -mfloat-abi=softfp
+#LOCAL_CFLAGS += -march=armv7-a -mfloat-abi=softfp
 LOCAL_LDLIBS += -Wl,--fix-cortex-a8
 
 LOCAL_C_INCLUDES :=   $(LOCAL_PATH)/include/

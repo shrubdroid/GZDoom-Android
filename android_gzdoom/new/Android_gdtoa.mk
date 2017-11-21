@@ -11,7 +11,8 @@ LOCAL_CFLAGS :=   -O2
 
 LOCAL_LDLIBS += -llog
 
-LOCAL_CFLAGS += -march=armv7-a -mfloat-abi=softfp -DINFNAN_CHECK -DMULTIPLE_THREADS
+#LOCAL_CFLAGS += -march=armv7-a -mfloat-abi=softfp -DINFNAN_CHECK -DMULTIPLE_THREADS
+LOCAL_CFLAGS += -DINFNAN_CHECK -DMULTIPLE_THREADS
 LOCAL_LDLIBS += -Wl,--fix-cortex-a8
 
 LOCAL_C_INCLUDES :=   . $(GZDOOM_TOP_PATH)/src/android/extrafiles 

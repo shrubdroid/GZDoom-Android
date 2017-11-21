@@ -12,7 +12,7 @@ LOCAL_CFLAGS =  -O2 -Wall -fomit-frame-pointer -D_7ZIP_ST
 
 LOCAL_LDLIBS += -llog
 
-LOCAL_CFLAGS += -march=armv7-a -mfloat-abi=softfp
+#LOCAL_CFLAGS += -march=armv7-a -mfloat-abi=softfp
 LOCAL_LDLIBS += -Wl,--fix-cortex-a8
 
 LOCAL_C_INCLUDES :=   C/
