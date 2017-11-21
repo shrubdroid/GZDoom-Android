@@ -94,7 +94,6 @@ public class Game extends SDLActivity implements Handler.Callback
       "SDL2_mixer",
       "SDL2_image",
       "touchcontrols",
-      "fmod",
       "openal",
       "gzdoom"
     };
