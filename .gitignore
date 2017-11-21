@@ -14,3 +14,6 @@
 /doom/src/main/obj
 /doom/src/main/jni/gzdoom_android
 /compile.log
+.idea
+GZDoom-Android.iml
+/doom/doom.iml
