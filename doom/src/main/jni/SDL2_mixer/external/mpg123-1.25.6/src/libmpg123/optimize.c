@@ -31,6 +31,10 @@ static struct cpuflags cpu_flags;
 #define cpu_neon(s)     1
 #endif
 
+#ifndef defopt
+#define defopt generic
+#endif
+
 /* Ugly macros to build conditional synth function array values. */
 
 #ifndef NO_8BIT

@@ -13,7 +13,7 @@ LOCAL_LDLIBS += -lGLESv1_CM -lEGL
 
 LOCAL_LDLIBS += -llog
 
-LOCAL_CFLAGS += -march=armv7-a -mfloat-abi=softfp
+#LOCAL_CFLAGS += -march=armv7-a -mfloat-abi=softfp
 LOCAL_LDLIBS += -Wl,--fix-cortex-a8
 
 
